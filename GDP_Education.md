@@ -270,20 +270,25 @@ This is even more apparent on the High income: OECD and the Lower middle income 
 ## GDP rankings divided into 5 quantile groups compared to each Income group.
 
 ```r
-knitr::kable(tablebyRankGroup, caption = "Table by Rank Group from 1 (highes GDP) to 5 (lowest GDP)")
+tablebyRankGroup
 ```
 
-
-
-Table: Table by Rank Group from 1 (highes GDP) to 5 (lowest GDP)
-
-           High income: nonOECD   High income: OECD   Low income   Lower middle income   Upper middle income
---------  ---------------------  ------------------  -----------  --------------------  --------------------
-Group 1                       4                  18            0                     5                    11
-Group 2                       5                  10            1                    13                     9
-Group 3                       8                   1            9                    12                     8
-Group 4                       4                   1           16                     8                     8
-Group 5                       2                   0           11                    16                     9
+```
+##          
+##           High income: nonOECD High income: OECD Low income
+##   Group 1                    4                18          0
+##   Group 2                    5                10          1
+##   Group 3                    8                 1          9
+##   Group 4                    4                 1         16
+##   Group 5                    2                 0         11
+##          
+##           Lower middle income Upper middle income
+##   Group 1                   5                  11
+##   Group 2                  13                   9
+##   Group 3                  12                   8
+##   Group 4                   8                   8
+##   Group 5                  16                   9
+```
 
 In this analysis we can see as expected there are no Low income countries in group 1 with the highest GDP but it is also interesting to see that the Lower middle income group has 5 countries that are among the group of nations with the highest rank, which is 1 more than the High income:nonOECD group has.
 
