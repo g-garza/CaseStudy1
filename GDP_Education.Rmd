@@ -12,19 +12,19 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
-This document delineates the analysis performed on the data sets for the gross domestic product ranking table and the education statistics. Both provided by the world bank. 
-The GDP data was downloaded from : https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv
-The Education data was obtained from: https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv
+This document delineates the analysis performed on the data sets for the gross domestic product ranking table and the education statistics. Both are provided by the world bank.     
+The GDP data was downloaded from : https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv.    
+The Education data was obtained from: https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv.
 
 The original data sources for the GDP and Education data are located respectively at:
 http://data.worldbank.org/data-catalog/GDP-ranking-table
 and
-http://data.worldbank.org/data-catalog/ed-stats
+http://data.worldbank.org/data-catalog/ed-stats.
 
 ### Project Structure
-The project contains 2 folders; Data and Analysis.  
+The project contains 2 folders: Data and Analysis.  
 The Data folder contains the code to download ("download.R") and to clean and merge the data ("cleanMerge.R").    
-The Analysis folder contains both "Analysis.R" and "Plots.R" which are used to do all of the calculations and analysis as well as create the plots for this project.
+The Analysis folder contains both "Analysis.R" and "Plots.R", which are used to do all of the calculations, analyses, and to create the plots for this project.
 ```{R}
 source("Data/downloadData.R")
 source("Data/cleanMerge.R")
@@ -32,21 +32,21 @@ source("Analysis/Analysis.R")
 source("Analysis/Plots.R")
 ```
 
-The messages listed above should indicate the data was downloaded with a SHA-1 hash which we use to make sure the data is consistent for reproducibility purposes.
-Please note all of the NA's introduced by coercion were accounted for and cleaned during the analysis so disregard the Warning message.
+The messages listed above should indicate the data was downloaded with a SHA-1 hash, which was used to make sure the data remains consistent.
+Please note all of the NA's introduced by coercion were accounted for and cleaned during the analysis. Disregard the warning message.
 
 ## The Data
-The data was initially downloaded and stored in 2 separate data frames "GDP.Data" for the GDP Data and "Education.Data" for the Education data.    
+The data was initially downloaded and stored in 2 separate data frames: "GDP.Data" for the GDP Data and "Education.Data" for the Education data.    
 After the data was cleaned and analyzed it was then stored in the data frames "newGDP" and "newEducation".
 
-The initial data frames "GDP.Data" and "Education.Data" were not modified as to maintain the original data from the download.
+The initial data frames "GDP.Data" and "Education.Data" were not modified in order to maintain the original data from the download.
 
 GDP.Data contains 330 records and 10 variables
 ```{R}
 names(GDP.Data)
 ```
 
-Education.Data contains 234 records and 31 variables
+Education.Data contains 234 records and 31 variables.
 ```{r}
 names(Education.Data)
 ```
@@ -54,27 +54,30 @@ names(Education.Data)
 
 ## Data Merge
 To complete this analysis a merge between the Education data and the GDP data was necessary.   
-After the data from "GDP.Data" and "Education.Data" were cleaned they were merged and a new data frame was created called "mergedEducationGDP".
+After the data from "GDP.Data" and "Education.Data" were cleaned, they were merged into a new data frame called "mergedEducationGDP".
 The merge was done by using CountryCode as the binding variable.     
-The resulting records after the merge totaled 190 observations but one of the variables included an NA  value so it was removed, leaving us with a total of 189 as we can see below.
+The resulting records after the merge totaled 190 observations. One of the variables included an NA value, so it was removed. This left us with a total of 189 records. See below.
 ```{R Merge}
 dim(mergedEducationGDP)
 ```
 
-After the merge only the variables that are pertaining to this analysis were kept.
+After the merge, only the variables that were pertaining to this analysis were kept.
 The new data frame "mergedEducationGDP" contains the following:
 ```{r}
 names(mergedEducationGDP)
 ```
 
 ## Countries with a low Gross Domestic Product
-The top 15 countries with the worse GDP are listed as follows
+
+The top 15 countries with the worse GDP are listed as follows:
 ```{R}
 head(subset(mergedEducationGDP, select=c(CountryCode, Ranking, Country)),n=15)
 ```
-Based on this observation we see St. Kitts and Nevis is the country with the 13th worse GDP.
+Based on this observation, we see St. Kitts and Nevis is the country with the 13th worse GDP.
+
 
 ##Average GDP rankings for High Income groups
+
 The average GDP ranking for all high income groups (both OECD and nonOECD) is:
 ```{R}
 mean(highIncome$Ranking)
@@ -88,8 +91,9 @@ And the average ranking for only the "High income: nonOECD" is
 mean(noOECD$Ranking)
 ```
 
-This analysis shows there is a big difference in GDC rankings between these 2 groups.     
+This analysis shows there is a big difference in GDP rankings between these 2 groups.     
 Even though they are both on the "High income" group, the nonOECD group has a much lower mean ranking (greater GDP).
+
 
 ## Distribution of GDP for all countries
 The distribution of GDP for all countries based on their Income Group is as follows:
@@ -97,7 +101,8 @@ The distribution of GDP for all countries based on their Income Group is as foll
 PlotAllCountries
 ```
 
-This plot shows the overall distribution of GDP in all the countries. There are only 3 above the 5,000,000 B in GDP mark and most of the countries GDP is too low in comparison to be representative on this plot.
+This plot shows the overall distribution of GDP in all the countries in this analysis. There are only 3 above the 5,000,000 B in GDP mark, and most of the countries' GDP is too low in comparison those 3 to be able to obtain any clear data from this plot.
+
 
 
 ### GDP distribution for all countries in their respective income group
@@ -105,8 +110,7 @@ This plot shows the overall distribution of GDP in all the countries. There are 
 PlotAllCountriesbyIGroup
 ```
 
-The results on this graph show the GDP distribution for the High income:nonOECD group is actually closer to the Low income group than it is to the other High income group (OECD) which is interesting. Also, the highest country in the nonOECD group does not go beyond 720,000B in GDP. The only other group with that low distribution is the Low income group.   
-Another interesting find is that the country with the highest GDP in the Lower middle income group is actually higher than all but one (HIgher income OECD) of the countries in the other groups.
+The results on this graph show that the GDP distribution for the 'High income:nonOECD' group is actually closer to the 'Low income' group than it is to the other high income group (OECD). In fact, the country with the highest GDP in the nonOECD group does not go beyond 720,000B. In addition, the only other income group that has countries with this low GDP value are in the 'Low income' group. The results also show that the country with the highest GDP in the Lower middle income group is actually higher than all the countries, except for the Higher income OECD group.
 
 ## Summary of statistics of GDP by income groups
 ```{R summaryStats}
@@ -114,8 +118,7 @@ tapply(mergedEducationGDP$GDP, mergedEducationGDP$`Income Group`, summary)
 tapply(mergedEducationGDP$GDP, mergedEducationGDP$`Income Group`, sd)
 ```
 
-Based on these results we can see that the distribution on each group is not an evenly distribution. The less dramatic one being the Low income group. The differences between the mininum and maximum values are really big and just by looking at the comparisson between the Maximum values to the rest of the quantiles we can suspect there are big outliers on this data.     
-This is even more apparent on the High income: OECD and the Lower middle income group.
+Based on these results, we can see that the distribution on each group is not evenly distributed. Based on these results, the distribution appears to be right skewed. There is a large range between the minimun and maximum values, and we can suspect there are outliers pulling the distribution. This is even more apparent on the High income: OECD group and the Lower middle income group.
 
 
 ## GDP rankings divided into 5 quantile groups compared to each Income group.
@@ -123,8 +126,7 @@ This is even more apparent on the High income: OECD and the Lower middle income 
 tablebyRankGroup
 ```
 
-In this analysis we can see as expected there are no Low income countries in group 1 with the highest GDP but it is also interesting to see that the Lower middle income group has 5 countries that are among the group of nations with the highest rank, which is 1 more than the High income:nonOECD group has.
+In this table, we can see there are no Low income countries in group 1, which can be expected because it could be perceived that low income countries would not have a high GDP. However,  we see that the Lower middle income group has 5 countries that are among the group of nations with the highest GDP. This group has 1 more country than the High income:nonOECD group.
 
 ## Conclusion
-The results from this analysis show that the distribution of GDP amoung the countries is very different, even for the countries with the same Income group. At this point we don't have the information to show how the groups were selected but based on the findings here, we see that there is very little if any correlation between the income group and GDP. In other words a higher income may not be equal to a higher GDC value.
-WIth these results it is hard to do a fair comparisson between countries, even on the same group. There are one or two countries on each group with a GDP value that is much higher than the rest of the other countries and it makes it harder to compare between them. In order to do a more fair and accurate comparisson we would most likely need to remove those countries with the higher values.
+The results from this data show that the distribution of GDP among the countries is simliar for each income group. There are a few countries that have an extreme high GDP. Whereas, the majority of countries have a lower GDP in comparison.  We see that there is very little, if any, correlation between the income group and GDP. In other words, a higher income may not be equal to a higher GDP value. Because of the extreme values in each group, it is difficult to make an accurate comparison between the countries based on their income group. If there was more information about how the countries were grouped, we could better understand why there are those extremes. Without these outliers we could more accurately compare the countries in each group. 
