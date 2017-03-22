@@ -170,8 +170,7 @@ head(subset(mergedEducationGDP, select=c(CountryCode, Ranking, Country)),n=15)
 ```
 Based on this observation, we see St. Kitts and Nevis is the country with the 13th worse GDP.
 
-
-##Average GDP rankings for High Income groups
+## Average GDP rankings for High Income groups
 
 The average GDP ranking for all high income groups (both OECD and nonOECD) is:
 
